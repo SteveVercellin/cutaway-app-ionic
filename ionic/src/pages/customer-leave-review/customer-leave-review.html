@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'LEAVE_REVIEW' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="review">
+            <ion-grid>
+              <ion-row [ngClass]="['row-label', 'row-label__first-row']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SERVICE_SUMMARY_SELECTED' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <barber-box [barber]="{
+                    'logo': review.barber.logo,
+                    'name': review.barber.name
+                  }"></barber-box>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let service of review.services">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': service.name,
+                    'time_process': service.time_process,
+                    'time_begin': '',
+                    'price': service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_DATE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <calendar [inputSelectedDate]="{
+                   'day': review.date.day,
+                   'month': review.date.month,
+                   'year': review.date.year
+                  }"></calendar>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_TIME' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['time-block', 'box-shadow-white', 'bordered-box', 'rounded-box']" *ngFor="let timeBlock of review.times_list">
+                <ion-col col-3 *ngFor="let time of timeBlock" [ngClass]="{'time': true, 'time-selected': time == review.time_selected}">
+                  {{ time }}
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'WRITE_YOUR_REVIEW' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <textarea [(ngModel)]="comment" class="review-input box-shadow-white bordered-box rounded-box"></textarea>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'YOUR_STAR_RATING' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <star-rating [rating]="{
+                    'percent': 0
+                  }"></star-rating>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['button-wrap']">
+                <ion-col col-12 text-center>
+                  <button ion-button [disabled]="!checkFormCanSubmit()" (click)="sendReview()" [ngClass]="['rounded-button', 'bordered-box', 'box-shadow-white']">{{ 'SUBMIT' | translate }}</button>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['reviews-wrap']" *ngIf="review.reviews.items.length">
+                <ion-col col-12>
+                  <fieldset class="bordered-box">
+                    <legend>{{ 'REVIEWS' | translate }} ({{ review.reviews.total }})</legend>
+                    <ion-grid>
+                      <ion-row [ngClass]="['review-row']" *ngFor="let review of review.reviews.items">
+                        <ion-col col-4 [ngClass]="['review-customer']">
+                          <p text-center>
+                            <img class="barber_avatar" src="{{ review.avatar }}" />
+                          </p>
+                          <p text-center>{{ review.name }}</p>
+                        </ion-col>
+                        <ion-col col-8>
+                          <star-rating [rating]="{
+                            'percent': review.rating_percent,
+                            'count': review.rating_count
+                          }"></star-rating>
+                          <div class="review-content" [innerHTML]="review.review"></div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </fieldset>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">
+          {{ 'CHRONOLOGY' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="customerHistories">
+            <ion-grid [ngClass]="['no-padding-left-right', 'content-wrap']">
+              <ion-row (click)="goToOrderDetail(history)" *ngFor="let history of customerHistories">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <barber-box [barber]="{
+                    'logo': history.logo,
+                    'name': history.name,
+                    'begin': history.begin
+                  }"></barber-box>
+                </ion-col>
+              </ion-row>
+              <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" [enabled]="!loadEnd">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

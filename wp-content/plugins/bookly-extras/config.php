@@ -1,0 +1,5 @@
+<?php
+
+defined('ALGOLIA_API_KEY') or define('ALGOLIA_API_KEY', 'EXG7U5B2WM');
+defined('ALGOLIA_SEARCH_KEY') or define('ALGOLIA_SEARCH_KEY', '836e4bf69104bb5922d3a8b7041bf1ff');
+defined('ALGOLIA_ADMIN_API_KEY') or define('ALGOLIA_ADMIN_API_KEY', '776e5741bcbd0cf6c44179c772523535');

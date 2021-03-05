@@ -1,0 +1,24 @@
+<div class="box-shadow-white bordered-box border-left-special-box rounded-box">
+  <ion-grid [ngClass]="['no-padding-left-right']">
+    <ion-row>
+      <ion-col col-12 align-self-center [ngClass]="['no-padding-left-right']">
+          <ng-container [ngSwitch]="data.month">
+            <ng-element *ngSwitchCase="1">{{ 'JANUARY_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="2">{{ 'FEBRUARY_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="3">{{ 'MARCH_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="4">{{ 'APRIL_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="5">{{ 'MAY_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="6">{{ 'JUNE_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="7">{{ 'JULY_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="8">{{ 'AUGUST_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="9">{{ 'SEPTEMBER_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="10">{{ 'OCTOBER_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="11">{{ 'NOVEMBER_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchCase="12">{{ 'DECEMBER_LONG' | translate }}</ng-element>
+            <ng-element *ngSwitchDefault></ng-element>
+          </ng-container>
+          {{ data.year }} <span class="day">{{ libFunc.convertDayToTwoChars(data.day) }}</span><span class="time rounded-box">{{ data.time }}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -1,0 +1,78 @@
+calendar {
+    .calendar-wrapper {
+        padding: 10px;
+    }
+    .col {
+        text-align: center;
+        padding: 5px;
+        &[col-1] {
+            -webkit-box-flex: 0;
+            -webkit-flex: 0 0 8.33333%;
+            -ms-flex: 0 0 8.33333%;
+            flex: 0 0 14.285714285714286%;
+            width: 14.285714285714286%;
+            max-width: 14.285714285714286%;
+            padding: 0;
+            &:before {
+                content: "";
+                display: block;
+                padding-top: 100%;
+            }
+            div {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                bottom: 5px;
+                right: 5px;
+                @include flexbox();
+                @include justify-content(center);
+                @include align-items(center);
+                &.current-day,
+                &.choose-day,
+                &.other-day {
+                    @include border-radius(100%);
+                }
+                &.other-day {
+                    background: #f6f8f9;
+                }
+                &.current-day,
+                &.choose-day {
+                    background: #2e3192;
+                    color: #fff;
+                }
+                &.choose-day {
+                    background: red;
+                }
+            }
+            &.last-month,
+            &.next-month {
+                color: #999;
+            }
+
+        }
+    }
+    .calendar-header {
+        color: $text-color;
+    }
+    .selected-date {
+
+    }
+    .unselected-date {
+
+    }
+    .calendar-body {
+        .grid {
+            padding: 0;
+        }
+        .calendar-weekday, .calendar-date {
+            text-align: center;
+            margin: 0;
+        }
+        .calendar-weekday {
+            font-size: 12px;
+        }
+        .calendar-date {
+            font-size: 13px;
+        }
+    }
+}

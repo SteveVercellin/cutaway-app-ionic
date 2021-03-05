@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'BARBER_ORDERS_HEADING' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="order">
+            <ion-grid>
+              <ion-row [ngClass]="['row-label', 'row-label__first-row']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SERVICE_SUMMARY_SELECTED' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <barber-box [barber]="{
+                    'logo': order.customer.logo,
+                    'name': order.customer.name
+                  }"></barber-box>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let service of order.services">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': service.name,
+                    'time_process': service.time_process,
+                    'time_begin': '',
+                    'price': service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_DATE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <calendar [inputSelectedDate]="{
+                   'day': order.date.day,
+                   'month': order.date.month,
+                   'year': order.date.year
+                  }"></calendar>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_TIME' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['time-block', 'box-shadow-white', 'bordered-box', 'rounded-box']" *ngFor="let timeBlock of order.times_list">
+                <ion-col col-3 *ngFor="let time of timeBlock" [ngClass]="{'time': true, 'time-selected': time == order.time_selected}">
+                  {{ time }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

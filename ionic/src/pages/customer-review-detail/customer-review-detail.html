@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <help [ngClass]="['icon', 'icon--floating', 'icon--right-location']"></help>
+        <div text-center class="page-top-heading">
+          {{ 'REVIEWS' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="review">
+            <ion-grid [ngClass]="['no-padding-left-right', 'content-wrap']">
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  {{ review.title }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['review-content', 'box-shadow-white', 'bordered-box', 'rounded-box']" [innerHTML]="review.comment"></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <button (click)="deleteReview()" [disabled]="!checkFormCanSubmit()" ion-button [ngClass]="['delete-review-btn', 'rounded-button', 'box-shadow-white', 'bordered-box']">{{ 'DELETE_REVIEW' | translate }}</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

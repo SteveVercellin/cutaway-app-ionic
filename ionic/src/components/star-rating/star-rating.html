@@ -1,0 +1,28 @@
+<div class="rating-wrap">
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngIf="!rating.hasOwnProperty('count')">
+        <ion-col col-12 align-self-center (click)="inputStarRating()">
+          <div class="star-rating star-rating--big-star">
+            <span [ngStyle]="{ 'width': rating.percent + '%' }"></span>
+          </div>
+        </ion-col>
+      </ng-container>
+      <ng-container *ngIf="rating.hasOwnProperty('count')">
+        <ion-col col-4 align-self-center>
+          <div class="star-rating">
+            <span [ngStyle]="{ 'width': rating.percent + '%' }"></span>
+          </div>
+        </ion-col>
+        <ion-col col-8 [ngClass]="['infor-rating-col']">
+          <div class="infor-rating" *ngIf="rating.count <= 1">
+            ({{ rating.count }} {{ 'RATING' | translate }})
+          </div>
+          <div class="infor-rating" *ngIf="rating.count > 1">
+            ({{ rating.count }} {{ 'RATINGS' | translate }})
+          </div>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</div>

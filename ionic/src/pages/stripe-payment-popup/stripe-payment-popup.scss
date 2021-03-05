@@ -1,0 +1,15 @@
+page-stripe-payment-popup {
+    background: #fff;
+
+    ion-select {
+        max-width: 100%;
+
+        &.select-md {
+            padding-left: 8px;
+        }
+
+        .select-text {
+            font-size: 14px;
+        }
+    }
+}

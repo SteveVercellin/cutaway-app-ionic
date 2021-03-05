@@ -1,0 +1,53 @@
+page-find-barber-result {
+    .find-barber-result-wrap {
+        color: $text-color;
+        .order-wrap {
+            margin-top: 30px;
+            .input-text-row {
+                margin-top: 0px;
+            }
+        }
+        .barbers-wrap {
+            margin: 30px 0px;
+            .barber-row {
+                padding: 10px 0;
+            }
+            .barber-avatar {
+                max-width: 65px;
+            }
+            h4 {
+                margin: 0;
+                font-size: 15px;
+                font-weight: 400;
+            }
+            p {
+                font-size: 12px;
+                margin: 5px 0 0 0;
+            }
+            .rating-wrap {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+ion-action-sheet {
+    .action-sheet-wrapper {
+        .action-sheet-button {
+            &.order-option {
+                padding-left: 32px;
+                background-repeat: no-repeat;
+                background-color: transparent;
+                background-position: 5px center;
+            }
+            &.order-order-alphabet {
+                background-image: url('../assets/imgs/find-barber-result/scissors.svg');
+            }
+            &.order-price {
+                background-image: url('../assets/imgs/find-barber-result/euro.svg');
+            }
+            &.order-rating {
+                background-image: url('../assets/imgs/find-barber-result/star.svg');
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<div class="calendar-wrapper box-shadow-white bordered-box rounded-box">
+  <div class="calendar-header">
+    <ion-row class="calendar-month">
+      <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+      <ion-col col-8>{{ currentMonth }} {{ currentYear }}</ion-col>
+      <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+    </ion-row>
+  </div>
+  <div class="calendar-body">
+    <ion-grid>
+      <ion-row class="calendar-weekday">
+        <ion-col>{{ 'SUNDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'MONDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'TUESDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'WEDNESDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'THURSDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'FRIDAY_SHORT' | translate }}</ion-col>
+        <ion-col>{{ 'SATURDAY_SHORT' | translate }}</ion-col>
+      </ion-row>
+      <ion-row class="calendar-date">
+        <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">
+          <div (click)="goToLastMonth(lastDay)">{{ lastDay }}</div>
+        </ion-col>
+        <ion-col col-1 *ngFor="let day of daysInThisMonth">
+          <div (click)="setSelectedDate(day, 'choose')" [class]="setDayCellClass(day)">{{ day }}</div>
+        </ion-col>
+        <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month">
+          <div (click)="goToNextMonth(nextDay)">{{ nextDay }}</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

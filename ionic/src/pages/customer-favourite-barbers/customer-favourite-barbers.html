@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">
+          {{ 'FAVOURITE' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="barbers">
+            <ion-grid [ngClass]="['no-padding-left-right', 'content-wrap']">
+              <ng-container *ngIf="barbers.length">
+                <ion-row *ngFor="let barber of barbers">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <barber-box [barber]="{
+                      'id': barber.id,
+                      'logo': barber.avatar,
+                      'name': barber.full_name,
+                      'favourite': barber.favourite
+                    }"></barber-box>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+              <ng-container *ngIf="!barbers.length">
+                <ion-row>
+                  <ion-col col-12>
+                    {{ 'NO_STAFFS_CUSTOMER_BOOKED' | translate }}
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

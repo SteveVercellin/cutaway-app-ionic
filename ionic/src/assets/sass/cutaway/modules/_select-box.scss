@@ -1,0 +1,20 @@
+.select-box {
+    &.select-alert {
+
+    }
+    &--apply-optgroup {
+        &.select-alert {
+            .alert-checkbox-group {
+                button[disabled=""] {
+                    .alert-checkbox-icon {
+                        display: none;
+                    }
+                    .alert-checkbox-label {
+                        font-size: 20px;
+                        padding: 13px;
+                    }
+                }
+            }
+        }
+    }
+}

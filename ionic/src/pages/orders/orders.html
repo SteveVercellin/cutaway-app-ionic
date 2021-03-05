@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">
+          {{ 'ORDERS' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="pendingOrders && pendingOrders.length">
+              <h3>{{ 'ORDERS_PENDING' | translate }}</h3>
+              <ion-row (click)="goToOrderDetail(order)" [ngClass]="['row-content']" *ngFor="let order of pendingOrders">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': 'Barbiere:' + order.barber.name,
+                    'time_process': '',
+                    'time_begin': order.time,
+                    'price': order.service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+            <ng-container *ngIf="completedOrders && completedOrders.length">
+              <h3>{{ 'ORDERS_COMPLETED' | translate }}</h3>
+              <ion-row (click)="goToOrderDetail(order)" [ngClass]="['row-content']" *ngFor="let order of completedOrders">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': 'Barbiere:' + order.barber.name,
+                    'time_process': '',
+                    'time_begin': order.time,
+                    'price': order.service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+              <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" [enabled]="!loadEnd">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

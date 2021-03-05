@@ -1,0 +1,21 @@
+fieldset.horizontal-line {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top: 2px solid #000;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    legend {
+        padding: 0 10px;
+        margin: 0 auto 8px;
+    }
+    &--white-line {
+        border-top-color: #fff;
+    }
+    &--white-text {
+        legend {
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.home {
+	.l-main {
+		background: #000 url(../images/homepage-bg.jpg) no-repeat;
+		background-size: 100%;
+		max-width: 375px;
+		min-height: 667px;
+		margin-top: 0;
+		#main {
+			// padding-top: 0;
+		}
+	}
+	&.logged-in {
+		.l-main {
+			background: #fff;
+			margin-top: 47px;
+			#main {
+				// padding-top: 25px;
+			}
+		}
+	}
+	.page-title {
+		text-align: left;
+	    font-size: 23px;
+	    margin-bottom: 20px;
+	}
+	.wrap-page-title {
+		margin: 0;
+		.page-title {
+			margin: 0;
+		}
+	}
+	.top-content + .logo-bianco {
+		padding-top: 55px;
+	}
+}
+
+@media (max-width: 374px) {
+	.home {
+		&.logged-in {
+			.l-main {
+				margin-top: 40px;
+			}
+		}
+	}
+}

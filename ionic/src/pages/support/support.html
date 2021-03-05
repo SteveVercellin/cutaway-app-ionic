@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu *ngIf="openPageType == 'go'" [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <back-button *ngIf="openPageType == 'push'" [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'SUPPORT' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                {{ 'QUESTION_AND_ANSWER' | translate }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                <ng-container *ngIf="questions">
+                  <accordion-list [items]="questions"></accordion-list>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                <a href="mailto:{{ support.email }}" [ngClass]="['button', 'rounded-button', 'box-shadow-white', 'bordered-box']">{{ 'OPEN_TICKET' | translate }}</a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                <a href="tel:{{ support.phone }}" [ngClass]="['button', 'rounded-button', 'box-shadow-white', 'bordered-box']">{{ 'CALL_OPERATOR' | translate }}</a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-8 [ngClass]="['no-padding-left-right', 'operator-time-active']">
+                {{ 'OPERATOR_TIME_ACTIVE' | translate }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

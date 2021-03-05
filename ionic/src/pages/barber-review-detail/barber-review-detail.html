@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <help [ngClass]="['icon', 'icon--floating', 'icon--right-location']"></help>
+        <div text-center class="page-top-heading">
+          {{ 'REVIEWS' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="review">
+            <ion-grid [ngClass]="['no-padding-left-right', 'content-wrap']">
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'CUSTOMER_REVIEW' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['review-content', 'box-shadow-white', 'bordered-box', 'rounded-box']" [innerHTML]="review.rating.comment"></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'CUSTOMER_RATING' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <star-rating [rating]="{
+                    'percent': review['rating']['percent'],
+                    'count': review['rating']['star']
+                  }"></star-rating>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

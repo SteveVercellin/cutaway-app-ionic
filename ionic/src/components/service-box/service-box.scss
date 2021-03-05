@@ -1,0 +1,16 @@
+service-box {
+    .service-time {
+        font-size: 13px;
+    }
+    .price-col {
+        .price-value {
+            display: inline-block;
+            background: #fef0e0;
+            padding: 5px;
+        }
+        img {
+            height: 11px;
+            margin-right: 1px;
+        }
+    }
+}

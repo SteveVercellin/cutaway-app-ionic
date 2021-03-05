@@ -1,0 +1,35 @@
+accordion-list {
+    .list {
+        .item-row {
+            background: #fff;
+            & + .item-row {
+                margin-top: 2px;
+            }
+            ion-item {
+                padding-left: 0px;
+                font-size: 15px;
+                color: $text-color;
+                .item-inner {
+                    border-bottom: none !important;
+                    padding-right: 0px;
+                    [item-end] {
+                        margin-right: 0px;
+                    }
+                }
+            }
+            .accordion-item-content {
+                @include transition(all 0.5s);
+                height: 0px;
+                overflow: hidden;
+                &.open {
+                    height: auto;
+                    border-top: 1px solid #e5eced;
+                    padding-top: 10px;
+                }
+                p {
+                    margin: 0 0 10px 0;
+                }
+            }
+        }
+    }
+}

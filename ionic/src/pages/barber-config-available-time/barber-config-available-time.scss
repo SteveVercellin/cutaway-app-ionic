@@ -1,0 +1,45 @@
+page-barber-config-available-time {
+    ion-grid.grid {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 20px;
+    }
+    ion-row {
+        + ion-row {
+            margin-top: 20px;
+        }
+        &.address-row {
+            ion-col {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+        }
+    }
+    .input-text-row {
+        margin-top: 0px;
+    }
+    .service-input {
+        .text-input[disabled] {
+            @include opacity(1);
+        }
+    }
+    .time-block {
+        font-size: 13px;
+        padding: 10px 0px;
+        & + .time-block {
+            margin-top: 10px;
+        }
+        .time {
+            @include flexbox();
+            @include justify-content(center);
+            @include align-items(center);
+            text-align: center;
+            height: 40px;
+        }
+        .time-selected {
+            color: #fff;
+            background: #2e3192;
+            @include border-radius(5px);
+        }
+    }
+}

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <div text-center class="page-top-heading">
+          {{ 'CHOOSE_SERVICE' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="booklyServices">
+            <div class="service" [ngStyle]="{'background-image': 'url(' + service.image + ')'}" *ngFor="let service of booklyServices">
+              <div class="service__mask"></div>
+              <div class="service__content-wrap">
+                <div class="service__content-wrap__title" text-uppercase>{{ service.title }}</div>
+                <div class="service__content-wrap__intro">{{ service.info }}</div>
+                <div class="service__content-wrap__action">
+                  <div class="service__content-wrap__action__btn">
+                    <button *ngIf="!selectedBooklyServices.hasOwnProperty(service.id)" ion-button (click)="updateSelectService(service)" [ngClass]="['rounded-button', 'bordered-box']">{{ 'BOOK' | translate }}</button>
+                    <button *ngIf="selectedBooklyServices.hasOwnProperty(service.id)" ion-button (click)="updateSelectService(service)" [ngClass]="['rounded-button', 'bordered-box']">
+                      <ion-icon name="checkmark"></ion-icon>
+                      {{ 'BOOKED' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wrap-btns" text-center>
+              <button ion-button (click)="completeSelectServices()" [ngClass]="['rounded-button', 'bordered-box', 'box-shadow-white']">{{ 'OK' | translate }}</button>
+              <button ion-button (click)="closeSelectServices()" [ngClass]="['rounded-button', 'bordered-box', 'box-shadow-white']">{{ 'CANCEL' | translate }}</button>
+            </div>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

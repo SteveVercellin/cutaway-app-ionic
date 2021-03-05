@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">&nbsp;</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <div class="find-barber-wrap">
+            <p text-center>
+              <img src="{{ logo }}" />
+            </p>
+            <h3>{{ 'WELCOME' | translate }}!</h3>
+            <ng-container *ngIf="validationsForm">
+              <form class="form find-barber-form" [formGroup]="validationsForm" (ngSubmit)="onSearchBarber()">
+                <ion-grid>
+                  <ion-row [ngClass]="['address-row']">
+                    <ion-col col-12 [ngClass]="['small-text']">
+                      {{ 'ENTER_YOUR_ADDRESS' | translate }}
+                    </ion-col>
+                    <ion-col col-12>
+                      <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ion-input type="text" placeholder="{{ 'ADDRESS_PLACEHOLDER' | translate }}" formControlName="address" [ngClass]="['form-controll']" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.address">
+                          <div class="error-message" *ngIf="validationsForm.get('address').hasError(validation.type) && (validationsForm.get('address').dirty || validationsForm.get('address').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ion-col>
+                    <ion-col col-12 [ngClass]="['small-text']">
+                      {{ 'SELECT_LOCATION' | translate }}
+                    </ion-col>
+                    <ion-col col-12>
+                      <ion-item [ngClass]="['address-input', 'box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ionic-selectable
+                          item-content
+                          formControlName="location"
+                          itemValueField="name"
+                          itemTextField="name"
+                          [items]="listLocations"
+                          [closeButtonText]="'CANCEL' | translate"
+                          [okButtonText]="'OK' | translate"
+                          [placeholder]="'SELECT_LOCATION' | translate"
+                          [canSearch]="true"
+                          [focusSearchbar]="true"
+                          [searchPlaceholder]="'SEARCH_LOCATION' | translate"></ionic-selectable>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.location">
+                          <div class="error-message" *ngIf="validationsForm.get('location').hasError(validation.type) && (validationsForm.get('location').dirty || validationsForm.get('location').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12 [ngClass]="['small-text']">
+                      {{ 'SELECT_DATE' | translate }}
+                    </ion-col>
+                    <ion-col col-12>
+                      <calendar></calendar>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <div text-center>
+                  <button ion-button [disabled]="!checkFormCanSubmit()" [ngClass]="['rounded-button', 'box-shadow-white']">{{ 'FIND_BARBER' | translate }}</button>
+                </div>
+              </form>
+            </ng-container>
+          </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

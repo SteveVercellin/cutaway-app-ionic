@@ -1,0 +1,102 @@
+page-barber-detail {
+    .barber-detail-wrap {
+        .barber-logo {
+            max-height: 65px;
+        }
+        p {
+            margin: 0;
+            & + p {
+                margin-top: 10px;
+            }
+        }
+        .barber-name-col {
+            font-size: 21px;
+        }
+        .large-icons-wrap {
+            margin-bottom: 10px;
+            p {
+                &.wrap-icon {
+                    height: 58px;
+                }
+            }
+            img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .price-box {
+            margin: 15px 0px;
+            .price-col {
+                font-size: 30px;
+                img {
+                    height: 20px;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .time-block {
+            font-size: 13px;
+            padding: 10px 0px;
+            & + .time-block {
+                margin-top: 10px;
+            }
+            .time {
+                @include flexbox();
+                @include justify-content(center);
+                @include align-items(center);
+                text-align: center;
+                height: 40px;
+            }
+            .time-selected {
+                color: #fff;
+                background: #2e3192;
+                @include border-radius(5px);
+            }
+        }
+        .button-wrap {
+            margin: 15px 0 30px;
+            button {
+                width: 170px;
+            }
+        }
+        .pictures-wrap {
+            margin-bottom: 20px;
+            img {
+                @include border-radius(20px);
+            }
+        }
+        .reviews-wrap {
+            font-size: 12px;
+            .review-row {
+                & + .review-row {
+                    margin-top: 15px;
+                }
+            }
+            .review-content {
+                margin-top: 5px;
+                p {
+                    & + p {
+                        margin-top: 15px;
+                    }
+                }
+            }
+            .barber_avatar {
+                @include border-radius(100%);
+                width: 49px;
+                height: 49px;
+            }
+            star-rating {
+                .infor-rating-col {
+                    text-align: right;
+
+                    .infor-rating {
+                        font-size: 9px;
+                    }
+                }
+            }
+            .review-customer {
+                font-size: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+<?php if (!defined('ABSPATH')) exit; // Exit if accessed directly
+use Bookly\Backend\Components\Controls\Buttons;
+use Bookly\Backend\Components\Controls\Inputs as ControlInputs;
+use Bookly\Backend\Components\Settings\Inputs;
+use Bookly\Backend\Components\Settings\Selects;
+?>
+<div class="tab-pane" id="bookly_settings_woo_commerce">
+    <form method="post" action="<?php echo esc_url( add_query_arg( 'tab', 'woo_commerce' ) ) ?>" id="woocommerce">
+        <div class="form-group">
+            <h4><?php _e( 'Instructions', 'bookly' ) ?></h4>
+            <p>
+                <?php _e( 'You need to install and activate WooCommerce plugin before using the options below.<br/><br/>Once the plugin is activated do the following steps:', 'bookly' ) ?>
+            </p>
+            <ol>
+                <li><?php _e( 'Create a product in WooCommerce that can be placed in cart.', 'bookly' ) ?></li>
+                <li><?php _e( 'In the form below enable WooCommerce option.', 'bookly' ) ?></li>
+                <li><?php _e( 'Select the product that you created at step 1 in the drop down list of products.', 'bookly' ) ?></li>
+                <li><?php _e( 'If needed, edit item data which will be displayed in the cart. Besides cart item data Bookly passes address and account fields into WooCommerce if you collect them in your booking form.', 'bookly' ) ?></li>
+            </ol>
+            <p>
+                <?php _e( 'Note that once you have enabled WooCommerce option in Bookly the built-in payment methods will no longer work. All your customers will be redirected to WooCommerce cart instead of standard payment step.', 'bookly' ) ?>
+            </p>
+        </div>
+
+        <?php Selects::renderSingle( 'bookly_wc_enabled', 'WooCommerce' ) ?>
+
+        <div class="form-group">
+            <label for="bookly_wc_product"><?php _e( 'Booking product', 'bookly' ) ?></label>
+            <select id="bookly_wc_product" class="form-control" name="bookly_wc_product">
+                <?php foreach ( $goods as $item ) : ?>
+                    <option value="<?php echo $item['id'] ?>" <?php selected( get_option( 'bookly_wc_product' ), $item['id'] ) ?>>
+                        <?php echo $item['name'] ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </div>
+
+        <?php Inputs::renderText( 'bookly_l10n_wc_cart_info_name', __( 'Cart item data', 'bookly' ) ) ?>
+        <?php Inputs::renderTextArea( 'bookly_l10n_wc_cart_info_value', '' ) ?>
+        <?php $self::renderTemplate( '_wc_codes' ) ?>
+
+        <div class="panel-footer">
+            <?php ControlInputs::renderCsrf() ?>
+            <?php Buttons::renderSubmit() ?>
+            <?php Buttons::renderReset() ?>
+        </div>
+    </form>
+</div>

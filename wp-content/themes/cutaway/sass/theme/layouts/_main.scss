@@ -1,0 +1,14 @@
+.l-main {
+	padding: 0 20px;
+	max-width: 375px;
+    margin: 47px auto 0 auto;
+    #main {
+    	padding-top: 0;
+    }
+}
+
+@media (max-width: 374px) {
+	.l-main {
+		margin-top: 40px;
+	}
+}

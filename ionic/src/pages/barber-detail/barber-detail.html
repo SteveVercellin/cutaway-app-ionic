@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <ng-container *ngIf="barberDetail">
+          <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+          <img class="icon icon--floating icon--right-location" src="../assets/imgs/global/favourite-unchoose.svg" *ngIf="!barberDetail.barber.is_favorite" />
+          <img class="icon icon--floating icon--right-location" src="../assets/imgs/global/favourite-choose.svg" *ngIf="barberDetail.barber.is_favorite" />
+          <div text-center class="page-top-heading">&nbsp;</div>
+        </ng-container>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="barberDetail">
+            <div class="barber-detail-wrap">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right']">
+                    <img class="barber-logo" src="{{ barberDetail.barber.logo }}" />
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right', 'barber-name-col']">
+                    {{ barberDetail.barber.name }}
+                  </ion-col>
+                </ion-row>
+                <ion-row [ngClass]="['large-icons-wrap']">
+                  <ion-col col-4 text-center>
+                    <p class='wrap-icon'><img src="../assets/imgs/barber-detail/star.svg" /></p>
+                    <p>{{ barberDetail.barber.rating }}</p>
+                  </ion-col>
+                  <ion-col col-4 text-center>
+                    <p class='wrap-icon'><img src="../assets/imgs/barber-detail/scissors.svg" /></p>
+                    <p text-lowercase>{{ barberDetail.barber.services }} {{ 'SERVICE' | translate }}</p>
+                  </ion-col>
+                  <ion-col col-4 text-center>
+                    <p class='wrap-icon'><img src="../assets/imgs/barber-detail/euro.svg" /></p>
+                    <p>{{ barberDetail.barber.euro }}</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="barberDetail.barber.description != ''">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                    {{ barberDetail.barber.description }}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <div class="price-box box-shadow-white bordered-box border-left-special-box rounded-box">
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col col-7 align-self-center>
+                            {{ 'PRICE_SERVICE' | translate }}:
+                          </ion-col>
+                          <ion-col col-5 text-right [ngClass]="['price-col']">
+                            <img src="../assets/imgs/barber-detail/euro.svg" />{{ barberDetail.service.price }}
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['small-text']">
+                    {{ 'SELECT_AVAILABLE_TIME_SLOTS' | translate }}
+                  </ion-col>
+                </ion-row>
+                <ng-container *ngIf="barberDetail.times_list.length">
+                  <ion-row [ngClass]="['time-block', 'box-shadow-white', 'bordered-box', 'rounded-box']" *ngFor="let timeBlock of barberDetail.times_list">
+                    <ion-col (click)="pickTime(time)" col-3 *ngFor="let time of timeBlock" [ngClass]="{'time': true, 'time-selected': time == timeSelected}">
+                      {{ time }}
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+                <ng-container *ngIf="!barberDetail.times_list.length">
+                  <ion-row [ngClass]="['time-block', 'box-shadow-white', 'bordered-box', 'rounded-box']">
+                    <ion-col col-12>
+                      {{ 'NO_TIME_SLOTS' | translate }}
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+                <ion-row [ngClass]="['button-wrap']">
+                  <ion-col col-12 text-center>
+                    <button ion-button [disabled]="!checkCanBookThisBarber()" (click)="bookThisBarber()" [ngClass]="['rounded-button', 'bordered-box', 'box-shadow-white']">{{ 'BOOK' | translate }}</button>
+                  </ion-col>
+                </ion-row>
+                <ng-container *ngIf="barberDetail.barber.pictures">
+                  <ion-row [ngClass]="['pictures-wrap']">
+                    <ion-col col-4 text-center *ngFor="let picture of barberDetail.barber.pictures">
+                      <img src="{{ picture }}" />
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+                <ion-row [ngClass]="['reviews-wrap']" *ngIf="barberDetail.reviews.items.length">
+                  <ion-col col-12>
+                    <fieldset class="bordered-box">
+                      <legend>{{ 'REVIEWS' | translate }} ({{ barberDetail.reviews.total }})</legend>
+                      <ion-grid>
+                        <ion-row [ngClass]="['review-row']" *ngFor="let review of barberDetail.reviews.items">
+                          <ion-col col-4 [ngClass]="['review-customer']">
+                            <p text-center>
+                              <img class="barber_avatar" src="{{ review.avatar }}" />
+                            </p>
+                            <p text-center>{{ review.name }}</p>
+                          </ion-col>
+                          <ion-col col-8>
+                            <star-rating [rating]="{
+                              'percent': review.rating_percent,
+                              'count': review.rating_count
+                            }"></star-rating>
+                            <div class="review-content" [innerHTML]="review.review"></div>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </fieldset>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

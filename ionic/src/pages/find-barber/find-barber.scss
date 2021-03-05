@@ -1,0 +1,45 @@
+page-find-barber {
+    .find-barber-form {
+        padding-bottom: 20px;
+        ion-grid {
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-bottom: 20px;
+        }
+        ion-row {
+            + ion-row {
+                margin-top: 20px;
+            }
+            &.address-row {
+                ion-col {
+                    padding-left: 0px;
+                    padding-right: 0px;
+                }
+            }
+        }
+        .input-text-row {
+            margin-top: 0px;
+        }
+        .address-input {
+            .ionic-selectable {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        .open-google-map {
+            position: absolute;
+            z-index: 99;
+            display: block;
+            width: 31px;
+            height: 46px;
+            right: 0px;
+            top: 5px;
+            background: url('../assets/imgs/global/shape-icon.svg') no-repeat left center transparent;
+        }
+        .service-input {
+            .text-input[disabled] {
+                @include opacity(1);
+            }
+        }
+    }
+}

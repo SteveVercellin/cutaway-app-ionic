@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <help [ngClass]="['icon', 'icon--floating', 'icon--right-location']"></help>
+        <div text-center class="page-top-heading">
+          {{ 'COMPLETE_PURCHASE' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="data">
+            <div class="book-complete-wrap">
+              <ion-grid [ngClass]="['no-padding-left-right']">
+                <ion-row>
+                  <ion-col col-12 text-center align-self-center [ngClass]="['no-padding-left-right', 'book-total-price']">
+                    {{ 'TOTAL' | translate }}:<img src="../assets/imgs/barber-detail/euro.svg" />{{ data.amount }}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                    {{ 'CHOOSE_PAYMENT_METHOD' | translate }}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right']">
+                    <booking-stripe-payment [data]="data"></booking-stripe-payment>
+                  </ion-col>
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right']">
+                    <booking-paypal-payment [data]="data"></booking-paypal-payment>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

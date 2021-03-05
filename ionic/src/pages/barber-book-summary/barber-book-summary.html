@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'SUMMARY' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="dataBook">
+            <ion-grid>
+              <ion-row [ngClass]="['row-label', 'row-label__first-row']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_SERVICE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let service of dataBook.services">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': service.title,
+                    'time_process': service.duration,
+                    'time_begin': '',
+                    'price': service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_BARBER' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <barber-box [barber]="{
+                    'logo': dataBook.barber.avatar,
+                    'name': dataBook.barber.full_name
+                  }"></barber-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'DATE_AND_TIME' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <date-time-box [data]="{
+                    'day': dataBook.date.day,
+                    'month': dataBook.date.month,
+                    'year': dataBook.date.year,
+                    'time': dataBook.time
+                  }"></date-time-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'CUSTOMER_ADDRESS' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <p>
+                    {{ data.data_load_service.address }}
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'NUMBER_PEOPLE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <p>
+                    {{ data.data_load_service.number_people }}
+                  </p>
+                </ion-col>
+              </ion-row>
+              <hr class="blue-color" />
+              <ng-container *ngIf="validationsForm">
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <form class="form" [formGroup]="validationsForm"  (ngSubmit)="onCompletePurchase()">
+                      <ion-list>
+                        <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                          <ion-input type="text" placeholder="{{ 'ENTER_SURNAME_REPORT' | translate }}" formControlName="surname_report" class="form-controll"></ion-input>
+                        </ion-item>
+                        <p class="small-text">{{ 'ENTER_SURNAME_REPORT' | translate }}</p>
+                        <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                          <ion-input type="text" placeholder="{{ 'ENTER_THE_FLOOR' | translate }}" formControlName="the_floor" class="form-controll"></ion-input>
+                        </ion-item>
+                        <p class="small-text">{{ 'ENTER_THE_FLOOR' | translate }}</p>
+                      </ion-list>
+                      <div text-right>
+                        <button ion-button [disabled]="!checkFormCanSubmit()" [ngClass]="['rounded-button', 'box-shadow-white', 'bordered-box']">{{ 'COMPLETE_PURCHASE' | translate }}</button>
+                      </div>
+                    </form>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+            </ion-grid>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,27 @@
+page-barber-book-summary {
+    .row-label {
+        margin-top: 10px;
+        &__first-row {
+            margin-top: 0px;
+        }
+    }
+    hr {
+        height: 2px;
+        width: 50%;
+        display: block;
+        margin: 20px auto;
+        &.white-color {
+            background: #fff;
+        }
+        &.blue-color {
+            background: #2e3192;
+        }
+    }
+    .form {
+        ion-item {
+            &:first-child {
+                margin-top: 0px;
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+paginate {
+    .pages-wrap {
+        margin: 10px 0px;
+        overflow: hidden;
+        .page {
+            padding: 10px;
+            & + .page {
+                border-left: 1px solid #e5eced;
+            }
+            &:last-child {
+                border-right: 1px solid #e5eced;
+            }
+            &.current {
+                background: #2e3192;
+                color: #fff;
+            }
+        }
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+}

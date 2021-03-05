@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">{{ 'BARBER_CONFIG_AVAILABLE_TIME_SLOTS_HEADING' | translate }}</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['small-text']">
+                  {{ 'SELECT_DATE' | translate }}
+                </ion-col>
+                <ion-col col-12>
+                  <calendar [inputSelectedDate]="{
+                    'day': calendarDateFromLastSetting.day,
+                    'month': calendarDateFromLastSetting.month,
+                    'year': calendarDateFromLastSetting.year
+                   }" [forceSelectable]="true"></calendar>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 *ngIf="selectedService">
+                  <ng-container *ngIf="selectedService.length">
+                    <p>{{ 'SELECTED_SERVICE' | translate }}</p>
+                    <ul>
+                      <li *ngFor="let service of selectedService">
+                        {{ service.name }}
+                      </li>
+                    </ul>
+                  </ng-container>
+                  <button ion-button (click)="openListServices()" [ngClass]="['rounded-button', 'box-shadow-white', 'bordered-box']">{{ 'SELECT' | translate }}</button>
+                </ion-col>
+              </ion-row>
+              <ng-container *ngIf="timeSlots">
+                <ng-container *ngIf="timeSlots.length">
+                  <ion-row>
+                    <ion-col col-12>
+                      <b>{{ 'SELECT_THE_TIME' | translate }}</b>
+                    </ion-col>
+                    <ion-col col-12 [ngClass]="['small-text']">
+                      {{ 'BARBER_CONFIG_AVAILABLE_TIME_SLOTS' | translate }}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row [ngClass]="['time-block', 'box-shadow-white', 'bordered-box', 'rounded-box']" *ngFor="let timeBlock of timeSlots">
+                    <ion-col (click)="pickTime(time)" col-3 *ngFor="let time of timeBlock" [ngClass]="{'time': true, 'time-selected': time['selected']}">
+                      {{ time['start_time'] }}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <button ion-button (click)="updateUnAvailableTimeSlots()" [ngClass]="['rounded-button', 'box-shadow-white', 'bordered-box', 'primary']">{{ 'SAVE' | translate }}</button>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+              </ng-container>
+            </ion-grid>
+            <div text-center>
+              <button ion-button (click)="getTimeSlots()" [disabled]="!checkCanGetTimeSlots()" [ngClass]="['rounded-button', 'box-shadow-white']">{{ 'SELECT' | translate }}</button>
+            </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,4 @@
+<?php
+
+define('CUSTOMER_APP_GROUPS_GET_LIMIT', 20);
+define('STAFF_APP_GROUPS_GET_LIMIT', 20);

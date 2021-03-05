@@ -1,0 +1,11 @@
+barber-box {
+    img {
+        height: 29px;
+        margin-right: 10px;
+        vertical-align: middle;
+        &.img-favourite {
+            height: 21px;
+            margin-right: 0px;
+        }
+    }
+}

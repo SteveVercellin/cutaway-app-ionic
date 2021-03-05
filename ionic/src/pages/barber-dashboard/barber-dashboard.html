@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">{{ 'BARBER_DASHBOARD_HEADING' | translate }}</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="dashboardData != null">
+              <h3>{{ 'REPORT_PRICE' | translate }}</h3>
+              <ion-row *ngFor="let report of dashboardData['report_price']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  {{ report }}
+                </ion-col>
+              </ion-row>
+              <h3>{{ 'DAY_TO_PAY' | translate }}</h3>
+              <ion-row *ngIf="dashboardData['day_to_pay'] != ''">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  {{ dashboardData['day_to_pay'] }}
+                </ion-col>
+              </ion-row>
+              <h3>{{ 'REVIEWS' | translate }}</h3>
+              <ion-row *ngIf="dashboardData['rating']['percent'] != '' && dashboardData['rating']['review'] != ''">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <star-rating [rating]="{
+                    'percent': dashboardData['rating']['percent'],
+                    'count': dashboardData['rating']['review']
+                  }"></star-rating>
+                </ion-col>
+              </ion-row>
+              <h3>{{ 'BOOK_AVAILABLE' | translate }}</h3>
+              <ion-row *ngIf="dashboardData['book_available'] != null">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <ion-item [ngClass]="['ion-item--no-padding-left-right', 'ion-item--no-label', 'ion-item--no-border']">
+                    <ion-toggle (ionChange)="changeBookAvailable($event)" [ngClass]="['ion-toggle--no-padding-left-right']" [(ngModel)]="dashboardData['book_available']"></ion-toggle>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

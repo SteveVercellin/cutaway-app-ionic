@@ -1,0 +1,27 @@
+page-barber-order-detail {
+    .row-label {
+        margin-top: 10px;
+        &__first-row {
+            margin-top: 0px;
+        }
+    }
+    .time-block {
+        font-size: 13px;
+        padding: 10px 0px;
+        & + .time-block {
+            margin-top: 10px;
+        }
+        .time {
+            @include flexbox();
+            @include justify-content(center);
+            @include align-items(center);
+            text-align: center;
+            height: 40px;
+        }
+        .time-selected {
+            color: #fff;
+            background: #2e3192;
+            @include border-radius(5px);
+        }
+    }
+}

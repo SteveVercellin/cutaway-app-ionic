@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">&nbsp;</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="sortedListBarbers">
+            <div class="find-barber-result-wrap">
+              <div class="order-wrap">
+                <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                  <ion-input type="text" placeholder="{{ 'ORDER_BY' | translate }}" [ngModel]="orderBarberSelectedHtml" (click)="showOrderBarberOptionsBox()" readonly="true"></ion-input>
+                </ion-item>
+              </div>
+              <div class="barbers-wrap">
+                <ion-grid [ngClass]="['no-padding-left-right']">
+                  <ng-container *ngIf="sortedListBarbers.length">
+                    <ion-row [ngClass]="['barber-row', 'input-text-row', 'box-shadow-white', 'bordered-box']" *ngFor="let barber of sortedListBarbers" (click)="goToBarberDetailPage(barber)">
+                      <ion-col col-4 align-self-center text-center>
+                        <img src="{{ barber.avatar }}" class="barber-avatar" />
+                      </ion-col>
+                      <ion-col col-8 align-self-center>
+                        <h4>{{ barber.full_name }}</h4>
+                        <p>{{ barber.location }}</p>
+                        <p>Capelli | Barba | €€€</p>
+                        <star-rating [rating]="{
+                          'percent': barber.rating_percent,
+                          'count': barber.rating_count
+                        }"></star-rating>
+                      </ion-col>
+                    </ion-row>
+                  </ng-container>
+                  <ng-container *ngIf="!sortedListBarbers.length">
+                    <ion-row [ngClass]="['box-shadow-white', 'bordered-box', 'rounded-box']">
+                      <ion-col col-12>
+                        {{ 'FIND_BARBER_NOT_FOUND' | translate }}
+                      </ion-col>
+                    </ion-row>
+                  </ng-container>
+                </ion-grid>
+              </div>
+            </div>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,53 @@
+<ng-container *ngIf="authenticatedData">
+    <ion-menu id="account-menu" side="left" [content]="app_content" enabled="false">
+        <ion-content>
+            <div class="top-section box-shadow-white">
+                <div class="layer-mask"></div>
+                <ion-grid [ngClass]="['grid', 'grid--full-height']">
+                    <ion-row align-items-center [ngClass]="['row', 'row--full-height']">
+                        <ion-col col-12>
+                            <div class="logo"></div>
+                            <div class="text account-name" text-center>{{ authenticatedData.user_display_name }}</div>
+                            <div class="text account-email" text-center>{{ authenticatedData.user_email }}</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="list-functions">
+                <ion-grid>
+                    <ion-row *ngFor="let page of authenticatedMenuPages" (click)="goToPage(page.page)">
+                        <ion-col col-2 text-center>
+                            <img [attr.src]="page.icon" />
+                        </ion-col>
+                        <ion-col col-10>
+                            {{ page.title }}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row (click)="logout()">
+                        <ion-col col-2 text-center>
+                            <img src="../assets/imgs/global/customer-left-menu/logout-ico.svg" />
+                        </ion-col>
+                        <ion-col col-10>
+                            {{ 'LOGOUT' | translate }}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </ion-content>
+    </ion-menu>
+    <ion-menu id="options-menu" side="right" [content]="app_content" enabled="false">
+        <ion-content>
+            <div class="list-functions">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-12>
+                            Options
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </ion-content>
+    </ion-menu>
+</ng-container>
+
+<ion-nav #app_content [root]="rootPage"></ion-nav>

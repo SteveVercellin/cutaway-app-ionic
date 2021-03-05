@@ -1,0 +1,5 @@
+<div float-start class="pages-wrap bordered-box rounded-box box-shadow-white" *ngIf="pages.length > 1">
+  <div (click)="goToPage(page)" class="page" float-start [class.current]="page == data.current" *ngFor="let page of pages">
+    {{ page }}
+  </div>
+</div>

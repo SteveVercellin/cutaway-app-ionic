@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <div text-center class="page-top-heading">
+          {{ 'PAY_WITH_CREDIT_CARD' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="validationsForm">
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <form class="form" [formGroup]="validationsForm"  (ngSubmit)="onPayUsingCreditCard()">
+                    <ion-list>
+                      <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ion-input type="text" placeholder="{{ 'CARD_NUMBER' | translate }}" formControlName="card_number" class="form-controll" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.card_number">
+                          <div class="error-message" *ngIf="validationsForm.get('card_number').hasError(validation.type) && (validationsForm.get('card_number').dirty || validationsForm.get('card_number').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                      <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ion-select placeholder="{{ 'CARD_EXPIRE_MONTH' | translate }}" formControlName="card_expire_month" class="form-controll" required>
+                          <ion-option *ngFor="let month of months" [value]="month">{{ month }}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.card_expire_month">
+                          <div class="error-message" *ngIf="validationsForm.get('card_expire_month').hasError(validation.type) && (validationsForm.get('card_expire_month').dirty || validationsForm.get('card_expire_month').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                      <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ion-input type="text" placeholder="{{ 'CARD_EXPIRE_YEAR' | translate }}" formControlName="card_expire_year" class="form-controll" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.card_expire_year">
+                          <div class="error-message" *ngIf="validationsForm.get('card_expire_year').hasError(validation.type) && (validationsForm.get('card_expire_year').dirty || validationsForm.get('card_expire_year').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                      <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                        <ion-input type="text" placeholder="{{ 'CARD_CVV' | translate }}" formControlName="card_cvv" class="form-controll" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.card_cvv">
+                          <div class="error-message" *ngIf="validationsForm.get('card_cvv').hasError(validation.type) && (validationsForm.get('card_cvv').dirty || validationsForm.get('card_cvv').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ion-list>
+                    <div text-center>
+                      <button ion-button (click)="onCancelPay()" [ngClass]="['rounded-button', 'box-shadow-white', 'bordered-box', 'horizontal-group-buttons']">
+                        <ion-icon name="arrow-round-back" [ngStyle]="{'padding': '0 10px'}"></ion-icon>
+                      </button>
+                      <button ion-button [disabled]="!checkFormCanSubmit()" [ngClass]="['rounded-button', 'box-shadow-white', 'bordered-box', 'horizontal-group-buttons']">{{ 'PAY' | translate }}</button>
+                    </div>
+                  </form>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">{{ 'BARBER_REVIEWS_HEADING' | translate }}</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="reviews">
+              <div [ngClass]="your-reviews-wrap">
+                <ion-row *ngFor="let item of reviews" (click)="goToReviewDetail(item);">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <barber-box [barber]="{
+                      'logo': item.customer.avatar,
+                      'name': item.customer.name + ' - ' + item.services[0].name + ' - ' + item.date.year + '/' + item.date.month + '/' + item.date.day + ' ' + item.date.time
+                    }"></barber-box>
+                  </ion-col>
+                </ion-row>
+                <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" [enabled]="!loadEnd">
+                  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+              </div>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

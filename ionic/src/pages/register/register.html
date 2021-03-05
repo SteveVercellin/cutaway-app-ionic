@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'REGISTER' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="register-wrap has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ng-container *ngIf="validationsForm">
+            <form class="form register-form" [formGroup]="validationsForm"  (ngSubmit)="onRegister()">
+                <ion-list>
+                  <ion-item [ngClass]="['name-row', 'box-shadow-white', 'input-text-row', 'bordered-box']">
+                    <ion-input type="text" placeholder="{{ 'ENTER_YOUR_NAME' | translate }}" formControlName="first_name" class="form-controll" required></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validationMessages.first_name">
+                      <div class="error-message" *ngIf="validationsForm.get('first_name').hasError(validation.type) && (validationsForm.get('first_name').dirty || validationsForm.get('first_name').touched)">
+                        {{ validation.message }}
+                      </div>
+                    </ng-container>
+                  </div>
+                  <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                    <ion-input type="text" placeholder="{{ 'ENTER_YOUR_LAST_NAME' | translate }}" formControlName="last_name" class="form-controll"></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validationMessages.last_name">
+                      <div class="error-message" *ngIf="validationsForm.get('last_name').hasError(validation.type) && (validationsForm.get('last_name').dirty || validationsForm.get('last_name').touched)">
+                        {{ validation.message }}
+                      </div>
+                    </ng-container>
+                  </div>
+                  <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                    <ion-input type="text" placeholder="{{ 'ENTER_YOUR_EMAIL' | translate }}" formControlName="email" class="form-controll" required></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validationMessages.email">
+                      <div class="error-message" *ngIf="validationsForm.get('email').hasError(validation.type) && (validationsForm.get('email').dirty || validationsForm.get('email').touched)">
+                        {{ validation.message }}
+                      </div>
+                    </ng-container>
+                  </div>
+                  <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                    <ion-input type="text" placeholder="{{ 'ENTER_YOUR_PHONE_NUMBER' | translate }}" formControlName="phone_number" class="form-controll"></ion-input>
+                  </ion-item>
+                  <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                    <ion-input type="text" placeholder="{{ 'ENTER_YOUR_CITY' | translate }}" formControlName="city" class="form-controll"></ion-input>
+                  </ion-item>
+                  <div formGroupName="matching_passwords">
+                    <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                      <ion-input type="password" placeholder="{{ 'ENTER_YOUR_PASSWORD' | translate }}" formControlName="password" class="form-controll" required></ion-input>
+                    </ion-item>
+                    <div class="validation-errors">
+                      <ng-container *ngFor="let validation of validationMessages.password">
+                        <div class="error-message" *ngIf="validationsForm.get('matching_passwords').get('password').hasError(validation.type) && (validationsForm.get('matching_passwords').get('password').dirty || validationsForm.get('matching_passwords').get('password').touched)">
+                          {{ validation.message }}
+                        </div>
+                      </ng-container>
+                    </div>
+                    <ion-item [ngClass]="['box-shadow-white', 'input-text-row', 'bordered-box']">
+                      <ion-input type="password" placeholder="{{ 'CONFIRM_YOUR_PASSWORD' | translate }}" formControlName="confirm_password" class="form-controll" required></ion-input>
+                    </ion-item>
+                    <div class="validation-errors">
+                      <ng-container *ngFor="let validation of validationMessages.confirm_password">
+                        <div class="error-message" *ngIf="validationsForm.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validationsForm.get('matching_passwords').get('confirm_password').dirty || validationsForm.get('matching_passwords').get('confirm_password').touched)">
+                          {{ validation.message }}
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validationMessages.matching_passwords">
+                      <div class="error-message" *ngIf="validationsForm.get('matching_passwords').hasError(validation.type) && (validationsForm.get('matching_passwords').get('confirm_password').dirty || validationsForm.get('matching_passwords').get('confirm_password').touched)">
+                        {{ validation.message }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-list>
+                <div text-center>
+                  <button ion-button [disabled]="isLoading || !validationsForm.valid" [ngClass]="['rounded-button', 'register', 'box-shadow-white', 'bordered-box']">{{ 'REGISTER' | translate }}</button>
+                </div>
+              </form>
+            </ng-container>
+          </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

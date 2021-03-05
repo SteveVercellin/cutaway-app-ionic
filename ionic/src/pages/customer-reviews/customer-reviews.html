@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">
+          {{ 'REVIEWS' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="needReviewOrders">
+              <div [ngClass]="you-need-reviews-wrap">
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                    {{ 'YOU_NEED_REVIEWS' | translate }}
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of needReviewOrders" (click)="goToLeaveReview(item);">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <barber-box [barber]="{
+                      'logo': item.barber.logo,
+                      'name': item.barber.name + ' - ' + item.services[0].name + ' - ' + item.date.year + '/' + item.date.month + '/' + item.date.day + ' ' + item.date.time
+                    }"></barber-box>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="reviewedOrders">
+              <div [ngClass]="your-reviews-wrap">
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                    {{ 'YOUR_REVIEWS' | translate }}
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of reviewedOrders" (click)="goToReviewDetail(item);">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    <barber-box [barber]="{
+                      'logo': item.barber.logo,
+                      'name': item.barber.name + ' - ' + item.services[0].name + ' - ' + item.date.year + '/' + item.date.month + '/' + item.date.day + ' ' + item.date.time
+                    }"></barber-box>
+                  </ion-col>
+                </ion-row>
+                <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" [enabled]="!loadEnd">
+                  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+              </div>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

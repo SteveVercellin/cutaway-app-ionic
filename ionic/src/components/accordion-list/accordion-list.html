@@ -1,0 +1,10 @@
+<ion-list>
+  <div *ngFor="let item of items" (click)="toggleContentItem(item.index)" class="item-row box-shadow-white bordered-box rounded-box border-left-special-box">
+    <ion-item>
+      {{ item.title }}
+      <i class="fa fa-angle-right" item-end *ngIf="!item.open"></i>
+      <i class="fa fa-angle-down" item-end *ngIf="item.open"></i>
+    </ion-item>
+    <div class="accordion-item-content" [class.open]="item.open" [innerHTML]="item.content"></div>
+  </div>
+</ion-list>

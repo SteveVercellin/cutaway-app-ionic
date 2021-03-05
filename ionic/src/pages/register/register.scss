@@ -1,0 +1,15 @@
+page-register {
+    .register-form {
+        ion-list {
+            margin: 20px 0px;
+        }
+        .name-row {
+            margin-top: 0px;
+        }
+        .button {
+            &.register {
+                width: 142px;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+date-time-box {
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .day,
+    .time {
+        display: inline-block;
+        background: #2e3192;
+        padding: 10px;
+        font-size: 12px;
+        color: #fff;
+    }
+    .day {
+        @include border-radius(100%, false);
+        margin-right: 10px;
+    }
+}

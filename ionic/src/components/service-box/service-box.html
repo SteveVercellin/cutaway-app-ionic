@@ -1,0 +1,24 @@
+<div class="box-shadow-white bordered-box border-left-special-box rounded-box">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8 align-self-center>
+        <div>{{ service.name }}</div>
+        <ng-container *ngIf="service.time_process != ''">
+          <div text-lowercase class="service-time">
+            {{ service.time_process }} {{ 'MINUTE' | translate }}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="service.time_begin != ''">
+          <div text-lowercase class="service-time">
+            {{ service.time_begin }}
+          </div>
+        </ng-container>
+      </ion-col>
+      <ion-col col-4 align-self-center text-right [ngClass]="['price-col']">
+        <div class="price-value rounded-box">
+          <img src="../assets/imgs/barber-detail/euro.svg" />{{ service.price }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

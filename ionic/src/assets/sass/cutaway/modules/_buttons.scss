@@ -1,0 +1,70 @@
+.button {
+    background: #fff;
+    color: $text-color;
+    font-size: 15px;
+    padding: 0 16px;
+    &.no-button-style {
+        border: none;
+        @include no-box-shadow();
+    }
+    &.icon-button {
+        &--icon-left-text-center {
+            .button-inner {
+                position: relative;
+                .fa {
+                    position: absolute;
+                    left: 20px;
+                    font-size: 2rem;
+                    display: block;
+                }
+            }
+        }
+    }
+    &.rounded-button {
+        @include border-radius(5px);
+    }
+    &.social-login {
+        color: #fff;
+    }
+    &.facebook-login {
+        background: #4065b4;
+    }
+    &.google-login {
+        background: #c1272d;
+    }
+    &.login {
+        width: 120px;
+    }
+    &.vertical-group-buttons {
+        & + .button {
+            margin-top: 20px;
+        }
+    }
+    &.horizontal-group-buttons {
+        & + .button {
+            margin-left: 20px;
+        }
+    }
+    &.pay-button {
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        background-color: transparent;
+        &__credit-card {
+            background-image: url('../assets/imgs/global/credit-card-icon.svg');
+        }
+        &__paypal {
+            background-image: url('../assets/imgs/global/paypal-icon.svg');
+        }
+    }
+    &.primary {
+        background-color: #488aff;
+        color: #fff;
+    }
+}
+
+a.button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-decoration: none;
+}

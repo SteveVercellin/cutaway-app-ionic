@@ -1,0 +1,14 @@
+{
+  "name": "cutaway",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "id": "f8621043",
+  "proxies": [
+    {
+      "path": "/wp-json",
+      "proxyUrl": "http://itcutaway.cutawayapp.it/wp-json"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+#bookly-staff-rating a {
+    border-bottom: none;
+}
+#bookly-staff-rating a:focus {
+    outline: none;
+}

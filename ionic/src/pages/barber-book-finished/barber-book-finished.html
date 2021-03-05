@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <help [ngClass]="['icon', 'icon--floating', 'icon--right-location']"></help>
+        <div text-center class="page-top-heading">&nbsp;</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <div class="content-wrap">
+            <div text-center>
+              <img src="../assets/imgs/barber-book-finished/finished-icon.svg" />
+            </div>
+            <div class="thank-you-heading" text-center>
+              {{ 'THANK_YOU_PURCHASE_HEADING' | translate }}
+            </div>
+            <div class="thank-you-content" text-center [innerHtml]="'THANK_YOU_PURCHASE_CONTENT' | translate"></div>
+            <div text-center>
+              <button (click)="goToOrderDetailPage()" ion-button [ngClass]="['rounded-button', 'box-shadow-white', 'vertical-group-buttons']">{{ 'LOOK_AT_YOUR_ORDER' | translate }}</button>
+              <button (click)="goToSupportPage()" ion-button [ngClass]="['vertical-group-buttons', 'no-button-style']">{{ 'NEED_HELP' | translate }}</button>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

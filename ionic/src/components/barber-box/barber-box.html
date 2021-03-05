@@ -1,0 +1,22 @@
+<div class="box-shadow-white bordered-box border-left-special-box rounded-box">
+  <ion-grid [ngClass]="['no-padding-left-right']">
+    <ion-row>
+      <ion-col [ngClass]="['no-padding-left']" col-12 align-self-center *ngIf="barber.favourite == '' && barber.begin == ''">
+        <img src="{{ barber.logo }}" /> {{ barber.name }}
+      </ion-col>
+      <ion-col [ngClass]="['no-padding-left']" col-9 align-self-center *ngIf="barber.favourite != '' && barber.begin == ''">
+        <img src="{{ barber.logo }}" /> {{ barber.name }}
+      </ion-col>
+      <ion-col [ngClass]="['no-padding-left']" col-6 align-self-center *ngIf="barber.favourite == '' && barber.begin != ''">
+        <img src="{{ barber.logo }}" /> {{ barber.name }}
+      </ion-col>
+      <ion-col [ngClass]="['no-padding-right']" col-3 align-self-center text-right *ngIf="barber.favourite != ''">
+        <img *ngIf="barber.favourite == 'no'" (click)="makeBarberFavourite(barber)" class="img-favourite" src="../assets/imgs/global/favourite-unchoose.svg" />
+        <img *ngIf="barber.favourite == 'yes'" (click)="makeBarberUnfavourite(barber)" class="img-favourite" src="../assets/imgs/global/favourite-choose.svg" />
+      </ion-col>
+      <ion-col [ngClass]="['no-padding-right']" col-6 align-self-center text-right text-lowercase *ngIf="barber.begin != ''">
+        {{ barber.begin }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

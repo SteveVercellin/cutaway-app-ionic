@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">{{ 'BARBER_ORDERS_HEADING' | translate }}</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="setupData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="orders && orders.length">
+              <ion-row (click)="goToOrderDetail(order)" [ngClass]="['row-content']" *ngFor="let order of orders">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <div class="box-shadow-white bordered-box border-left-special-box rounded-box">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col col-12 align-self-center>
+                          <div>{{ order.display }}</div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-infinite-scroll (ionInfinite)="doLoadMore($event)" [enabled]="!loadEnd">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

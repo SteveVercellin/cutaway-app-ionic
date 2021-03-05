@@ -1,0 +1,15 @@
+page-barber-review-detail {
+    .content-wrap {
+        margin-top: 20px;
+    }
+    .review-content {
+        margin: 10px 0px 20px;
+        padding: 15px;
+        p {
+            margin: 0px;
+            & + p {
+                margin-top: 10px;
+            }
+        }
+    }
+}

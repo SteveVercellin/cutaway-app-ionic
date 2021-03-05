@@ -1,0 +1,14 @@
+page-order-detail {
+    .row-label {
+        margin-top: 10px;
+        &__first-row {
+            margin-top: 0px;
+        }
+    }
+    .row-pending-confirmation {
+        font-size: 20px;
+    }
+    .col-cancel-order-note {
+        font-size: 13px;
+    }
+}

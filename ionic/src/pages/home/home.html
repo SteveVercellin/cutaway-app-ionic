@@ -1,0 +1,71 @@
+<ion-content>
+  <div class="header-wrap">
+    <ion-grid>
+      <ion-col col-12>
+        <img src="{{ logo }}" />
+      </ion-col>
+    </ion-grid>
+  </div>
+  <div class="home-wrap">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <button ion-button block (click)="fbLogin()" [disabled]="isLoading" [ngClass]="['icon-button--icon-left-text-center', 'rounded-button', 'social-login',  'facebook-login', 'vertical-group-buttons', 'box-shadow-black']">
+            <i class="fa fa-facebook-f"></i>
+            {{ 'LOGIN_USE_FACEBOOK' | translate }}
+          </button>
+          <button ion-button block (click)="googleLogin()" [disabled]="isLoading" [ngClass]="['icon-button--icon-left-text-center', 'rounded-button', 'social-login', 'google-login', 'vertical-group-buttons', 'box-shadow-black']">
+            <i class="fa fa-google"></i>
+            {{ 'LOGIN_USE_GOOGLE' | translate }}
+          </button>
+          <button ion-button block (click)="goToRegisterPage()" [disabled]="isLoading" [ngClass]="['rounded-button', 'register', 'vertical-group-buttons', 'box-shadow-black']">
+            {{ 'REGISTER_FOR_FREE' | translate }}
+          </button>
+          <ng-container *ngIf="validationsForm">
+            <form class="form login-form" [formGroup]="validationsForm"  (ngSubmit)="onLogin()">
+                <fieldset class="horizontal-line horizontal-line--white-line horizontal-line--white-text">
+                    <legend>{{ 'ALREADY_HAVE_USER' | translate }}</legend>
+                    <ion-list>
+                      <ion-item [ngClass]="['username-row', 'box-shadow-black', 'input-text-row']">
+                        <ion-label>
+                          <img src="../assets/imgs/global/email-icon.svg" />
+                        </ion-label>
+                        <ion-input type="text" placeholder="{{ 'EMAIL' | translate }}" formControlName="username" class="form-controll" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.username">
+                          <div class="error-message" *ngIf="validationsForm.get('username').hasError(validation.type) && (validationsForm.get('username').dirty || validationsForm.get('username').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                      <ion-item [ngClass]="['box-shadow-black', 'input-text-row']">
+                        <ion-label>
+                          <img src="../assets/imgs/global/password-icon.svg" />
+                        </ion-label>
+                        <ion-input type="password" placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" class="form-controll" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validationMessages.password">
+                          <div class="error-message" *ngIf="validationsForm.get('password').hasError(validation.type) && (validationsForm.get('password').dirty || validationsForm.get('password').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ion-list>
+                </fieldset>
+                <div text-center>
+                  <button ion-button [disabled]="!checkFormCanSubmit()" [ngClass]="['rounded-button', 'login', 'box-shadow-black']">{{ 'LOGIN' | translate }}</button>
+                </div>
+              </form>
+              <div text-center (click)="goToForgetPassPage()" class="forget-password">
+                {{ 'FORGET_PASSWORD_TEXT' | translate }}
+              </div>
+            </ng-container>
+          </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,89 @@
+$ratingSize: 56px;
+$ratingHeight: 11px;
+$bigRatingSize: 125px;
+$bigRatingHeight: 25px;
+
+star-rating {
+    .rating-wrap {
+        font-size: 12px;
+        ion-grid,
+        ion-col {
+            padding: 0px;
+        }
+        .star-rating {
+            height: $ratingHeight;
+            position: relative;
+            width: $ratingSize;
+            &:before { // inactive
+                background-image: url("../assets/imgs/global/normal-star.webp");
+                background-repeat: repeat-x;
+                background-size: $ratingHeight;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: $ratingHeight;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: $ratingSize;
+            }
+            > span {
+                display: block;
+                text-indent: -10000px;
+                width: $ratingSize;
+                height: $ratingHeight;
+                position: absolute;
+                overflow: hidden;
+                &:before { // active
+                    background-image: url("../assets/imgs/global/hover-star.webp");
+                    background-repeat: repeat-x;
+                    background-size: $ratingHeight;
+                    bottom: 0;
+                    content: "";
+                    display: block;
+                    height:$ratingHeight;
+                    left: 0;
+                    position: absolute;
+                    right: 0;
+                    text-indent: 10000px;
+                    top: 0;
+                }
+            }
+            &--big-star {
+                width: $bigRatingSize;
+                height: $bigRatingHeight;
+                &:before {
+                    width: $bigRatingSize;
+                    height: $bigRatingHeight;
+                    background-size: $bigRatingHeight;
+                }
+                > span {
+                    width: $bigRatingSize;
+                    height: $bigRatingHeight;
+                    &:before {
+                        height: $bigRatingHeight;
+                        background-size: $bigRatingHeight;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ion-app {
+    &.app-root-ios {
+        star-rating {
+            .rating-wrap {
+                &:before { // inactive
+                    background-image: url("../assets/imgs/global/normal-star.png");
+                }
+                > span {
+                    &:before { // active
+                        background-image: url("../assets/imgs/global/hover-star.png");
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@mixin border-radius($radius, $important: false) {
+    @if $important {
+        border-radius: $radius !important;
+        -webkit-border-radius: $radius !important;
+        -moz-border-radius: $radius !important;
+    } @else {
+        border-radius: $radius;
+        -webkit-border-radius: $radius;
+        -moz-border-radius: $radius;
+    }
+}
+@mixin opacity($opacity: 0.5) {
+    filter: alpha(opacity=$opacity*100);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=#{$opacity*100});
+    opacity: $opacity;
+}

@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <back-button [ngClass]="['icon', 'icon--floating']"></back-button>
+        <div text-center class="page-top-heading">
+          {{ 'ORDERS' | translate }}
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ng-container *ngIf="order">
+              <ion-row [ngClass]="['row-label', 'row-label__first-row']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_SERVICE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-content']" *ngFor="let service of order.services">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <service-box [service]="{
+                    'name': service.title,
+                    'time_process': service.time_process,
+                    'time_begin': '',
+                    'price': service.price
+                  }"></service-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'SELECTED_BARBER' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <barber-box [barber]="{
+                    'logo': order.barber.logo,
+                    'name': order.barber.full_name
+                  }"></barber-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'DATE_AND_TIME' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <date-time-box [data]="{
+                    'day': order.date.day,
+                    'month': order.date.month,
+                    'year': order.date.year,
+                    'time': order.time
+                  }"></date-time-box>
+                </ion-col>
+              </ion-row>
+              <ion-row [ngClass]="['row-label']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                  {{ 'ORDER_NOTE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <p *ngFor="let note of order.notes">
+                    {{ note }}
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ng-container *ngIf="readOnly">
+                <ion-row [ngClass]="['row-label']">
+                  <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                    {{ 'STATUS' | translate }}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                    {{ translateStrings[order.status] }}
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+              <ion-row *ngIf="!readOnly" [ngClass]="['row-pending-confirmation']">
+                <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                  <p text-center>{{ 'PENDING_CONFIRMATION' | translate }}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="!readOnly">
+                <ion-col col-6 align-self-center>
+                  <button (click)="cancelOrder(order)" ion-button [ngClass]="['box-shadow-white', 'bordered-box']" round>{{ 'CANCEL_ORDER' | translate }}</button>
+                </ion-col>
+                <ion-col col-6 align-self-center [ngClass]="['col-cancel-order-note']">
+                  {{ 'CANCEL_ORDER_NOTE' | translate }}
+                </ion-col>
+              </ion-row>
+              <ng-container *ngIf="!readOnly && order.status == 'pending'">
+                <ion-row style="margin-top: 20px;">
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right']">
+                    <booking-stripe-payment [data]="dataBook"></booking-stripe-payment>
+                  </ion-col>
+                  <ion-col col-12 text-center [ngClass]="['no-padding-left-right']">
+                    <booking-paypal-payment [data]="dataBook"></booking-paypal-payment>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+            </ng-container>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

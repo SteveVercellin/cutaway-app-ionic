@@ -1,0 +1,10 @@
+page-orders {
+    .block-wrap {
+        margin-top: 30px;
+        .row-content {
+            & + .row-content {
+                margin-top: 5px;
+            }
+        }
+    }
+}

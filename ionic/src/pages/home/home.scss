@@ -1,0 +1,48 @@
+page-home {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: transparent;
+    .header-wrap {
+        position: absolute;
+        z-index: 98;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        text-align: center;
+        img {
+            margin-top: 10px;
+        }
+    }
+    .home-wrap {
+        position: absolute;
+        z-index: 99;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+    }
+    .login-form {
+        margin-top: 40px;
+        ion-list {
+            margin-bottom: 20px;
+        }
+        .username-row {
+            margin-top: 0px;
+        }
+    }
+    .forget-password {
+        padding: 15px 0px;
+        color: #fff;
+    }
+}
+
+ion-app {
+    page-home {
+        background-image: url('../assets/imgs/home/background.webp');
+    }
+    &.app-root-ios {
+        page-home {
+            background-image: url('../assets/imgs/home/background.png');
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <toggle-account-menu [ngClass]="['icon', 'icon--floating']"></toggle-account-menu>
+        <div text-center class="page-top-heading">{{ 'BARBER_SUPPORT_HEADING' | translate }}</div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content>
+  <div class="has-top-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-grid [ngClass]="['no-padding-left-right']">
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right', 'small-text']">
+                {{ 'QUESTION_AND_ANSWER' | translate }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['no-padding-left-right']">
+                <ng-container *ngIf="questions">
+                  <accordion-list [items]="questions"></accordion-list>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['small-text']">
+                {{ 'EMAIL' | translate }}
+              </ion-col>
+              <ion-col col-12>
+                <a [href]="'mailto:' + email">{{ email }}</a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 [ngClass]="['small-text']">
+                {{ 'PHONE' | translate }}
+              </ion-col>
+              <ion-col col-12>
+                {{ phone }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

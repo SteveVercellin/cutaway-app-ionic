@@ -1,6 +1,6 @@
 {
   "require": {
-    "illuminate/database": "^5.7",
+    "illuminate/database": "^6.20",
     "vlucas/phpdotenv": "^2.5"
   },
   "autoload": {

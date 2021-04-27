@@ -47,7 +47,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "again": "0.0.1",
     "cordova-android": "8.0.0",
-    "cordova-ios": "5.0.0",
+    "cordova-ios": "5.1.1",
     "cordova-plugin-facebook4": "^3.2.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "es6-promise-plugin": "^4.2.2",
